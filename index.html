@@ -85,46 +85,27 @@
 		            ></iframe>`;
 		        };
 
-           const BagTimeline = ({ data }) => {
-  const yGap = 44;          // vertical spacing between events
-  const r = 6;              // dot radius
-  const xLine = 24;         // vertical axis position
-  const height = yGap * data.history.length; // total SVG height
-
-  // Return real SVG nodes (no innerHTML)
+		           const BagTimeline = ({ data }) => {
   return html`
-    <svg
-      width="100%"
-      height=${height}
-      xmlns="http://www.w3.org/2000/svg"
-      style="overflow:visible"
-    >
-      <!-- Vertical timeline line -->
-      <line
-        x1=${xLine}
-        y1="0"
-        x2=${xLine}
-        y2=${height}
-        stroke="#1F14DC"
-        stroke-width="2"
-      />
-
-      ${data.history.map((evt, i) => {
-        const y = yGap * i + r;
+    <VerticalStack spacing={8}>
+      ${data.history.map((evt) => {
         const d = new Date(evt.timestamp);
-        const date = d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" });
-        const time = d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
-
+        const date = d.toLocaleDateString("es-ES", {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric",
+        });
+        const time = d.toLocaleTimeString("es-ES", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
         return html`
-          <g key=${i}>
-            <circle cx=${xLine} cy=${y} r=${r} fill="#1F14DC" />
-            <text x=${xLine + 14} y=${y + 4} font-size="12" fill="white">
-              ${date} ${time} — ${evt.event} en ${evt.location}
-            </text>
-          </g>
+          <BaseText>
+            ${date} ${time} — ${evt.event} en ${evt.location}
+          </BaseText>
         `;
       })}
-    </svg>
+    </VerticalStack>
   `;
 };
 	
