@@ -181,6 +181,27 @@
                </Carousel>
              `;
            };
+
+           const WebsiteAppButtons = ({ /* data */ }) => {
+              const openSafe = (url) => {
+                const w = window.open(url, "_blank", "noopener,noreferrer");
+                if (!w) location.href = url; // fallback si bloquea popups
+              };
+
+              return html`
+                <div style="display:flex;gap:12px;flex-wrap:wrap">
+                  <TextButton
+                    label="Visit website"
+                    onClick=${() => openSafe("https://www.united.com/en/us/baggage/bag-help")}
+                  />
+                  <TextButton
+                    label="Ver en la app"
+                    onClick=${() => openSafe("https://apps.apple.com/us/app/united-airlines/id449945214")}
+                    type="ghost"
+                  />
+                </div>
+              `;
+            };
 	
             const touchpoint = await create({
               config: {
@@ -192,7 +213,8 @@
               },
               customModalities: {
                BRCGenAIVideo,
-               BagTimeline
+               BagTimeline,
+               WebsiteAppButtons
               },
               // Brand customization
               colorMode: "dark", // "light" or "dark"
