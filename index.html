@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Background Image Page</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background-image: url('https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish'); /* Replace with your image path */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        height: 100vh;
+        font-family: Arial, sans-serif;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        background-color: rgba(0, 0, 0, 0.5); /* Optional: adds contrast */
+        padding: 20px;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <script type="module">
+      import { create, React, html, TextButton, Icons } from "https://unpkg.com/@nlxai/touchpoint-ui@1.1.1/lib/index.js?module";
+            const theme = {
+          // Typography
+          fontFamily: '"Barlow", sans-serif',
+
+          // Accent and additional colors
+          accent: "#1F14DC",
+
+          // Status colors
+          warningPrimary: "#FFA500",
+          warningSecondary: "rgba(255, 165, 0, 0.1)",
+          errorPrimary: "#FF0000",
+          errorSecondary: "rgba(255, 0, 0, 0.1)",
+
+          // Layout
+          innerBorderRadius: "4px",
+          outerBorderRadius: "12px",
+        };
+
+            const storageKey = "touchpoint-session";
+
+            const saveSession = (conversationHandler, responses) => {
+              const sessionData = {
+                conversationId: conversationHandler.currentConversationId(),
+                responses: responses,
+              };
+              sessionStorage.setItem(storageKey, JSON.stringify(sessionData));
+            };
+
+            const retrieveSession = () => {
+              try {
+                const data = JSON.parse(sessionStorage.getItem(storageKey) || "{}");
+                if (data.responses && data.conversationId) {
+                  return data;
+                }
+                return null;
+              } catch (err) {
+                return null;
+              }
+            };
+
+            // Initialize touchpoint with persisted history
+            const savedSession = retrieveSession();
+						
+						const BRCGenAIVideo = ({ data }) => {
+		          const videoSrc = `https://www.youtube.com/embed/${data.src}`;
+		          return html`
+		            <iframe
+		              width="264"
+		              height="160"
+		              src=${videoSrc}
+		              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		              allowFullScreen
+		            ></iframe>`;
+		        };
+
+           const BagTimeline = ({ data }) => {
+  const yGap = 44;          // vertical spacing between events
+  const r = 6;              // dot radius
+  const xLine = 24;         // vertical axis position
+  const height = yGap * data.history.length; // total SVG height
+
+  // Return real SVG nodes (no innerHTML)
+  return html`
+    <svg
+      width="100%"
+      height=${height}
+      xmlns="http://www.w3.org/2000/svg"
+      style="overflow:visible"
+    >
+      <!-- Vertical timeline line -->
+      <line
+        x1=${xLine}
+        y1="0"
+        x2=${xLine}
+        y2=${height}
+        stroke="#1F14DC"
+        stroke-width="2"
+      />
+
+      ${data.history.map((evt, i) => {
+        const y = yGap * i + r;
+        const d = new Date(evt.timestamp);
+        const date = d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" });
+        const time = d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+
+        return html`
+          <g key=${i}>
+            <circle cx=${xLine} cy=${y} r=${r} fill="#1F14DC" />
+            <text x=${xLine + 14} y=${y + 4} font-size="12" fill="white">
+              ${date} ${time} — ${evt.event} en ${evt.location}
+            </text>
+          </g>
+        `;
+      })}
+    </svg>
+  `;
+};
+	
+            const touchpoint = await create({
+              config: {
+                applicationUrl: "",
+                headers: { "nlx-api-key": "" },
+                languageCode: "en-US",
+                conversationId: savedSession?.conversationId,
+                responses: savedSession?.responses
+              },
+              customModalities: {
+               BRCGenAIVideo,
+               BagTimeline
+              },
+              // Brand customization
+              colorMode: "dark", // "light" or "dark"
+              theme: theme,
+              windowSize: "half",
+              brandIcon: "https://brandlogos.net/wp-content/uploads/2025/03/united_airlines_icon-logo_brandlogos.net_54inw.png", // Header logo
+              launchIcon: "https://brandlogos.net/wp-content/uploads/2025/03/united_airlines_icon-logo_brandlogos.net_54inw.png", // Chat button icon
+              chatMode: true,
+              userMessageBubble: true,
+              agentMessageBubble: true,
+              chatMode: true
+            });
+            touchpoint.expanded = true;
+                // Save session on every update
+            touchpoint.conversationHandler.subscribe((responses) => {
+              saveSession(touchpoint.conversationHandler, responses);
+            });
+    </script>
+  </body>
+</html>
