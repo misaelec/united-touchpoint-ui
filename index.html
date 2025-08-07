@@ -14,7 +14,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed !important;
+        background-attachment: fixed;
         height: 100vh;
         font-family: Arial, sans-serif;
         color: white;
@@ -55,30 +55,6 @@
         font-size: 12px;
         color: #666;
       }
-      /* Chat styling overrides */
-      .tp-chat {
-        background: #010208;
-      }
-      .tp-message.user .tp-bubble {
-        background: #26272E;
-        color: #FDFFFF;
-      }
-      .tp-message.agent .tp-bubble {
-        background: transparent;
-        color: #FDFFFF;
-      }
-      .tp-input-wrapper {
-        background: #14161C;
-        color: #7C7E7F;
-      }
-      .tp-input-wrapper input,
-      .tp-input-wrapper textarea {
-        background: transparent;
-        color: #7C7E7F;
-      }
-      .tp-input-wrapper button {
-        background: #35373B;
-      }
     </style>
   </head>
   <body>
@@ -100,28 +76,18 @@
         fontFamily: '"Barlow", sans-serif',
 
         // Primary colors (text)
-        primary80: "#FDFFFF",
-        primary60: "rgba(253, 255, 255, 0.6)",
+        primary80: "#FFFFFF",
+        primary60: "rgba(255, 255, 255, 0.6)",
 
-        // Accent
+        // Secondary colors (backgrounds)
+        secondary80: "rgba(255, 255, 255, 0.8)",
+        secondary20: "rgba(255, 255, 255, 0.2)",
+
+        // Accent and additional colors
         accent: "#1F14DC",
         accent20: "rgba(31, 20, 220, 0.2)",
-
-        // Window and chat background
-        background: "#010208",
-        windowBackground: "#010208",
-        
-        // Bubble backgrounds and text
-        userBubbleBackground: "#26272E",
-        userBubbleText: "#FDFFFF",
-        agentBubbleBackground: "transparent",
-        agentBubbleText: "#FDFFFF",
-
-        // Input styling
-        inputBackground: "#14161C",
-        inputText: "#7C7E7F",
-        sendButtonBackground: "#35373B",
-        sendButtonText: "#FDFFFF",
+        background: "rgba(20, 20, 20, 0.85)",
+        overlay: "rgba(0, 0, 0, 0.5)",
 
         // Status colors
         warningPrimary: "#FFA500",
@@ -129,7 +95,7 @@
         errorPrimary: "#FF0000",
         errorSecondary: "rgba(255, 0, 0, 0.1)",
 
-        // Layout radii
+        // Layout
         innerBorderRadius: "16px",
         outerBorderRadius: "24px",
       };
@@ -197,7 +163,7 @@
                          setSelectedId(evt.timestamp);
                          conversationHandler.sendChoice(evt.timestamp);
                        }}
-                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
+                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
                      >
                        <CustomCardImageRow
                          src=${imgSrc}
