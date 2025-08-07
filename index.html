@@ -182,8 +182,11 @@
              `;
            };
 
-           const WebsiteAppButtons = ({ data }) => html`
-    <TextButton label="Title" onClick=${() => window.open("https://google.com", "_blank")} />
+     const WebsiteAppButtons = ({ data }) => html`
+    <CustomCard href=https://google.com newTab=${true}>
+      <CustomCardRow left=${html`<BaseText>Hey</BaseText>`}
+                     right=${html`<BaseText>Visitar</BaseText>`} />
+    </CustomCard>
   `;
 	
             const touchpoint = await create({
