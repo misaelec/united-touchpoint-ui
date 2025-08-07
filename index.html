@@ -184,12 +184,11 @@
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
-      <CustomCardRow 
-          left=${html`<BaseText>Visit website</BaseText>`}
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
                      />
     </CustomCard>
-    <CustomCard 
-          left=${html`<BaseText>View in app</BaseText>`}
+    <CustomCard href=https://apps.apple.com/us/app/united-airlines/id449945214 newTab=${true}>
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
        />
     </CustomCard>
   `;
