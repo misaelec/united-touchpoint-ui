@@ -73,3 +73,22 @@
   border-radius: 16px !important;
   padding: 8px 12px !important;
 }
+
+
+/* Touchpoint widget container constraints */
+.tp-wrapper,
+.tp-window,
+.tp-container,
+.tp-modal {
+  max-height: 80vh !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+/* Ensure the widget doesn't span full height */
+.tp-wrapper {
+  height: auto !important;
+  top: auto !important;
+  bottom: 16px !important;
+  margin: 0 16px;
+}
