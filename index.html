@@ -183,8 +183,12 @@
            };
 
      const WebsiteAppButtons = ({ data }) => html`
-    <CustomCard href=https://google.com newTab=${true}>
-      <CustomCardRow left=${html`<BaseText>Hey</BaseText>`}
+    <CustomCard href=${data.url} newTab=${true}>
+      <CustomCardRow left=${html`<BaseText>${data.title}</BaseText>`}
+                     right=${html`<BaseText>Visitar</BaseText>`} />
+    </CustomCard>
+    <CustomCard href=${data.url} newTab=${true}>
+      <CustomCardRow left=${html`<BaseText>${data.title}</BaseText>`}
                      right=${html`<BaseText>Visitar</BaseText>`} />
     </CustomCard>
   `;
