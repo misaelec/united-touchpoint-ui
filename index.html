@@ -27,49 +27,33 @@
         padding: 20px;
         border-radius: 10px;
       }
-
-      /* BagTimeline styles */
-      .bag-timeline {
-        width: 100%;
-        max-width: 400px;
-        padding: 16px;
-        background: rgba(0, 0, 0, 0.4);
+      /* BagTimeline card + rows */
+      .bag-card {
+        background: rgba(0, 0, 0, 0.5);
         border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        padding: 16px;
+        max-width: 400px;
         margin: 0 auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       }
-      .bag-event {
+      .bag-row {
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
-        position: relative;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       }
-      .bag-event:not(:last-child)::after {
-        content: '';
-        position: absolute;
-        left: 12px;
-        top: 20px;
-        bottom: -20px;
-        width: 2px;
-        background: #555;
+      .bag-row:last-child {
+        border-bottom: none;
       }
-      .bag-dot {
-        width: 12px;
-        height: 12px;
-        background: #1F14DC;
-        border-radius: 50%;
-        margin-right: 12px;
-        position: relative;
-        z-index: 1;
-      }
-      .bag-event-title {
+      .bag-row-title {
         font-weight: 600;
         color: #ffffff;
-        margin-bottom: 4px;
       }
-      .bag-event-details {
+      .bag-row-details {
         font-size: 12px;
         color: #dddddd;
+        text-align: right;
       }
     </style>
   </head>
@@ -132,32 +116,29 @@
 		        };
 
            const BagTimeline = ({ data }) => {
-     return html`
-       <div class="bag-timeline">
-         ${data.history.map((evt) => {
-           const d = new Date(evt.timestamp);
-           const date = d.toLocaleDateString("es-ES", {
-             day: "2-digit",
-             month: "2-digit",
-             year: "numeric",
-           });
-           const time = d.toLocaleTimeString("es-ES", {
-             hour: "2-digit",
-             minute: "2-digit",
-           });
-           return html`
-             <div class="bag-event">
-               <div class="bag-dot"></div>
-               <div>
-                 <div class="bag-event-title">${evt.event}</div>
-                 <div class="bag-event-details">${date} ${time} — ${evt.location}</div>
+             return html`
+               <div class="bag-card">
+                 ${data.history.map((evt) => {
+                   const d = new Date(evt.timestamp);
+                   const date = d.toLocaleDateString("es-ES", {
+                     day: "2-digit",
+                     month: "2-digit",
+                     year: "numeric",
+                   });
+                   const time = d.toLocaleTimeString("es-ES", {
+                     hour: "2-digit",
+                     minute: "2-digit",
+                   });
+                   return html`
+                     <div class="bag-row">
+                       <div class="bag-row-title">${evt.event}</div>
+                       <div class="bag-row-details">${date} ${time} — ${evt.location}</div>
+                     </div>
+                   `;
+                 })}
                </div>
-             </div>
-           `;
-         })}
-       </div>
-     `;
-   };
+             `;
+           };
 	
             const touchpoint = await create({
               config: {
