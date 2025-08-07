@@ -14,7 +14,7 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        background-attachment: fixed !important;
         height: 100vh;
         font-family: Arial, sans-serif;
         color: white;
@@ -197,7 +197,7 @@
                          setSelectedId(evt.timestamp);
                          conversationHandler.sendChoice(evt.timestamp);
                        }}
-                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
+                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
                      >
                        <CustomCardImageRow
                          src=${imgSrc}
