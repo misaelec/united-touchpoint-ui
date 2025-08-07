@@ -133,7 +133,7 @@
                    const location = evt.location || '';
                    let imgSrc = 'https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish';
                    if (location.includes('London')) {
-                     imgSrc = 'https://res.cloudinary.com/aenetworks/image/upload/c_fill,ar_2,w_3840,h_1920,g_auto/dpr_auto/f_auto:q_auto:eco/v1/topic-london-gettyimages-760251843-feature?_a=BAVAZGDX0';
+                     imgSrc = 'https://i.natgeofe.com/n/fb2875fc-bad9-44f8-8c45-fab6184719b7/20240629-0302-Jonathan%20Irish-NGCW-CITI-AA-London-_7R57614-Enhanced-NR_16x9.jpg';
                    } else if (location.includes('Chicago')) {
                      imgSrc = 'https://images.adsttc.com/media/images/6357/61f1/acba/9b43/c73e/acaf/large_jpg/make-no-little-plans-a-brief-history-of-chicago-architecture_6.jpg?1666671133';
                    } else if (location.includes('San Francisco') || location.includes('SFO')) {
@@ -151,7 +151,7 @@
                          setSelectedId(evt.timestamp);
                          conversationHandler.sendChoice(evt.timestamp);
                        }}
-                       style="width: 280px; height: 360px; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;"
+                       style="width: 280px; height: 360px; background: #ffffff; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;"
                      >
                        <CustomCardImageRow
                          src=${imgSrc}
