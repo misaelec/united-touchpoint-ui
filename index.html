@@ -70,42 +70,30 @@
         CustomCardRow,
         BaseText
       } from "https://unpkg.com/@nlxai/touchpoint-ui@1.1.1/lib/index.js?module";
-      const completeTheme = {
+      const theme = {
         // Typography
         fontFamily: '"Barlow", sans-serif',
 
-        primary80: "rgba(0, 0, 0, 0.8)",
-        primary60: "rgba(0, 0, 0, 0.6)",
-        primary40: "rgba(0, 0, 0, 0.4)",
-        primary20: "rgba(0, 0, 0, 0.2)",
-        primary10: "rgba(0, 0, 0, 0.1)",
-        primary5: "rgba(0, 0, 0, 0.05)",
-        primary1: "rgba(0, 0, 0, 0.01)",
-      
+        // Primary colors (text)
+        primary80: "#FDFFFF",
+
         // Secondary colors (backgrounds)
-        secondary80: "rgba(255, 255, 255, 0.8)",
-        secondary60: "rgba(255, 255, 255, 0.6)",
-        secondary40: "rgba(255, 255, 255, 0.4)",
-        secondary20: "rgba(255, 255, 255, 0.2)",
-        secondary10: "rgba(255, 255, 255, 0.1)",
-        secondary5: "rgba(255, 255, 255, 0.05)",
-        secondary1: "rgba(255, 255, 255, 0.01)",
-      
+
         // Accent and additional colors
-        accent: "#FF5733",
-        accent20: "rgba(255, 87, 51, 0.2)",
+        accent: "#1F14DC",
+        accent20: "rgba(31, 20, 220, 0.2)",
         background: "#010208",
-        overlay: "rgba(0, 0, 0, 0.4)",
-      
+        overlay: "rgba(0, 0, 0, 0.5)",
+
         // Status colors
         warningPrimary: "#FFA500",
         warningSecondary: "rgba(255, 165, 0, 0.1)",
         errorPrimary: "#FF0000",
         errorSecondary: "rgba(255, 0, 0, 0.1)",
-      
+
         // Layout
-        innerBorderRadius: "4px",
-        outerBorderRadius: "12px"
+        innerBorderRadius: "16px",
+        outerBorderRadius: "24px",
       };
 
             const storageKey = "touchpoint-session";
@@ -209,7 +197,7 @@
               },
               // Brand customization
               colorMode: "dark", // "light" or "dark"
-              theme: completeTheme,
+              theme: theme,
               windowSize: "half",
               brandIcon: "https://brandlogos.net/wp-content/uploads/2025/03/united_airlines_icon-logo_brandlogos.net_54inw.png", // Header logo
               launchIcon: "https://brandlogos.net/wp-content/uploads/2025/03/united_airlines_icon-logo_brandlogos.net_54inw.png", // Chat button icon
