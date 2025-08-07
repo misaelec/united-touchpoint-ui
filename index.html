@@ -10,10 +10,11 @@
       body {
         margin: 0;
         padding: 0;
-        background-image: url('https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish'); /* Replace with your image path */
+        background-image: url('https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
+        background-attachment: fixed;
         height: 100vh;
         font-family: Arial, sans-serif;
         color: white;
@@ -53,6 +54,30 @@
       .bag-carousel-card-details {
         font-size: 12px;
         color: #666;
+      }
+      /* Chat styling overrides */
+      .tp-chat {
+        background: #010208;
+      }
+      .tp-message.user .tp-bubble {
+        background: #26272E;
+        color: #FDFFFF;
+      }
+      .tp-message.agent .tp-bubble {
+        background: transparent;
+        color: #FDFFFF;
+      }
+      .tp-input-wrapper {
+        background: #14161C;
+        color: #7C7E7F;
+      }
+      .tp-input-wrapper input,
+      .tp-input-wrapper textarea {
+        background: transparent;
+        color: #7C7E7F;
+      }
+      .tp-input-wrapper button {
+        background: #35373B;
       }
     </style>
   </head>
