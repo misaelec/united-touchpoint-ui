@@ -87,9 +87,15 @@
 		            ></iframe>`;
 		        };
 
-		           const BagTimeline = ({ data }) => {
+           const BagTimeline = ({ data }) => {
   return html`
-    <VerticalStack spacing={8}>
+    <div style="
+      width: 100%;
+      max-width: 400px;
+      padding: 16px;
+      background: rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+    ">
       ${data.history.map((evt) => {
         const d = new Date(evt.timestamp);
         const date = d.toLocaleDateString("es-ES", {
@@ -102,12 +108,33 @@
           minute: "2-digit",
         });
         return html`
-          <BaseText>
-            ${date} ${time} — ${evt.event} en ${evt.location}
-          </BaseText>
+          <div style="
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+          ">
+            <div style="
+              width: 8px;
+              height: 8px;
+              background: #1F14DC;
+              border-radius: 50%;
+              margin-right: 12px;
+            "></div>
+            <div>
+              <div style="
+                font-weight: 600;
+                color: #ffffff;
+                margin-bottom: 4px;
+              ">${evt.event}</div>
+              <div style="
+                font-size: 12px;
+                color: #dddddd;
+              ">${date} ${time} — ${evt.location}</div>
+            </div>
+          </div>
         `;
       })}
-    </VerticalStack>
+    </div>
   `;
 };
 	
