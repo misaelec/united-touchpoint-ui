@@ -128,7 +128,7 @@
            const BagTimeline = ({ data, conversationHandler }) => {
              const [selectedId, setSelectedId] = React.useState(null);
              return html`
-               <Carousel class="bag-carousel">
+               <Carousel>
                  ${data.history.map((evt) => {
                    const location = evt.location || '';
                    let imgSrc = 'https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish';
@@ -151,12 +151,12 @@
                          setSelectedId(evt.timestamp);
                          conversationHandler.sendChoice(evt.timestamp);
                        }}
-                       class="bag-carousel-card"
+                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
                      >
                        <CustomCardImageRow
                          src=${imgSrc}
                          alt="Update image"
-                         class="bag-carousel-card-image"
+                         style="width: 100%; height: 160px; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;"
                        />
                        <CustomCardRow
                          left=${html`<BaseText faded>${evt.event}</BaseText>`}
