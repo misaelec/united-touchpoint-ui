@@ -70,23 +70,34 @@
         CustomCardRow,
         BaseText
       } from "https://unpkg.com/@nlxai/touchpoint-ui@1.1.1/lib/index.js?module";
-            const theme = {
-          // Typography
-          fontFamily: '"Barlow", sans-serif',
+      const theme = {
+        // Typography
+        fontFamily: '"Barlow", sans-serif',
 
-          // Accent and additional colors
-          accent: "#1F14DC",
+        // Primary colors (text)
+        primary80: "#FFFFFF",
+        primary60: "rgba(255, 255, 255, 0.6)",
 
-          // Status colors
-          warningPrimary: "#FFA500",
-          warningSecondary: "rgba(255, 165, 0, 0.1)",
-          errorPrimary: "#FF0000",
-          errorSecondary: "rgba(255, 0, 0, 0.1)",
+        // Secondary colors (backgrounds)
+        secondary80: "rgba(255, 255, 255, 0.8)",
+        secondary20: "rgba(255, 255, 255, 0.2)",
 
-          // Layout
-          innerBorderRadius: "4px",
-          outerBorderRadius: "12px",
-        };
+        // Accent and additional colors
+        accent: "#1F14DC",
+        accent20: "rgba(31, 20, 220, 0.2)",
+        background: "rgba(20, 20, 20, 0.85)",
+        overlay: "rgba(0, 0, 0, 0.5)",
+
+        // Status colors
+        warningPrimary: "#FFA500",
+        warningSecondary: "rgba(255, 165, 0, 0.1)",
+        errorPrimary: "#FF0000",
+        errorSecondary: "rgba(255, 0, 0, 0.1)",
+
+        // Layout
+        innerBorderRadius: "16px",
+        outerBorderRadius: "24px",
+      };
 
             const storageKey = "touchpoint-session";
 

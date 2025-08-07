@@ -31,3 +31,38 @@
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
+
+
+/* Further Touchpoint widget constraints */
+.tp-wrapper {
+  max-width: 360px !important;
+  width: auto !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  left: auto !important;
+  top: auto !important;
+}
+
+.tp-window {
+  max-height: 80vh !important;
+  height: auto !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.tp-container {
+  border-radius: 16px !important;
+  overflow: hidden !important;
+}
+
+.tp-chat {
+  max-height: calc(80vh - 160px) !important;
+  overflow-y: auto !important;
+}
+
+.tp-input-wrapper {
+  margin: 0 16px 16px;
+  padding: 8px 12px !important;
+  background: rgba(255,255,255,0.05) !important;
+  border-radius: 16px !important;
+}
