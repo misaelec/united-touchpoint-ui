@@ -55,6 +55,29 @@
         color: #666;
       }
     </style>
+    /* Pill bubbles */
+    .tp-message .tp-bubble {
+      border-radius: 999px !important;
+      padding: 12px 20px !important;
+    }
+
+    /* Agent bubbles: semi-transparent light grey */
+    .tp-message.agent .tp-bubble {
+      background: rgba(255, 255, 255, 0.15) !important;
+      color: #ffffff !important;
+    }
+
+    /* User bubbles: darker grey */
+    .tp-message.user .tp-bubble {
+      background: rgba(0, 0, 0, 0.5) !important;
+      color: #ffffff !important;
+    }
+
+    /* Header bubbles (initial messages) slightly different */
+    .tp-header .tp-bubble {
+      background: rgba(255, 255, 255, 0.2) !important;
+      color: #ffffff !important;
+    }
   </head>
   <body>
     <script type="module">
