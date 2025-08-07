@@ -182,26 +182,9 @@
              `;
            };
 
-           const WebsiteAppButtons = ({ /* data */ }) => {
-              const openSafe = (url) => {
-                const w = window.open(url, "_blank", "noopener,noreferrer");
-                if (!w) location.href = url; // fallback si bloquea popups
-              };
-
-              return html`
-                <div style="display:flex;gap:12px;flex-wrap:wrap">
-                  <TextButton
-                    label="Visit website"
-                    onClick=${() => openSafe("https://www.united.com/en/us/baggage/bag-help")}
-                  />
-                  <TextButton
-                    label="Ver en la app"
-                    onClick=${() => openSafe("https://apps.apple.com/us/app/united-airlines/id449945214")}
-                    type="ghost"
-                  />
-                </div>
-              `;
-            };
+           const WebsiteAppButtons = ({ data }) => html`
+    <TextButton label="Title" onClick=${() => window.open("https://google.com", "_blank")} />
+  `;
 	
             const touchpoint = await create({
               config: {
