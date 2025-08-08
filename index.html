@@ -120,17 +120,18 @@
             // Initialize touchpoint with persisted history
             const savedSession = retrieveSession();
 						
-						const BRCGenAIVideo = ({ data }) => {
-		          const videoSrc = `https://www.youtube.com/embed/${data.src}`;
-		          return html`
-		            <iframe
-		              width="264"
-		              height="160"
-		              src=${videoSrc}
-		              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-		              allowFullScreen
-		            ></iframe>`;
-		        };
+            const BRCGenAIVideo = ({ data }) => {
+              if (!data?.src) return null;
+              const videoSrc = `https://www.youtube.com/embed/${data.src}`;
+              return html`
+                <iframe
+                  width="264"
+                  height="160"
+                  src=${videoSrc}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>`;
+            };
 
            const BagTimeline = ({ data, conversationHandler }) => {
              const [selectedId, setSelectedId] = React.useState(null);
@@ -210,11 +211,11 @@
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
-      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
+      <CustomCardRow  icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
                      />
     </CustomCard>
     <CustomCard href=https://apps.apple.com/us/app/united-airlines/id449945214 newTab=${true}>
-      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
+      <CustomCardRow  icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
        />
     </CustomCard>
   `;
