@@ -136,36 +136,44 @@
   const [selectedId, setSelectedId] = React.useState(null);
 
   return html`
-    <CustomCard
-      key="bag-timeline-card"
-      selected=${false}
-      style=""
-    >
+    <CustomCard key="bag-timeline-card" selected=${false}>
       ${data.history.map((evt) => {
         const location = evt.location || '';
         const hasTimestamp = Boolean(evt.timestamp);
-        const d = hasTimestamp ? new Date(evt.timestamp) : null;
-        const date = hasTimestamp ? d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" }) : '';
-        const time = hasTimestamp ? d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : '';
+        if (!hasTimestamp) return '';
+
+        const d = new Date(evt.timestamp);
+        const date = d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" });
+        const time = d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+        // assume evt.iconUrl holds your image source
+        const iconUrl = evt.iconUrl || '/path/to/default-icon.png';
 
         return html`
-          ${hasTimestamp ? html`
-          <CustomCardRow
+          <${CustomCardRow}
             key=${evt.timestamp}
             left=${html`
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <img src="src/united-favicon.ico" alt="Time Icon" width="16" height="16" />
-      <BaseText>${date} ${time}</BaseText>
-    </div>
-  `}
-            right=${html`<BaseText>${location}</BaseText>`}
+              <div style="display:flex; align-items:center;">
+                <img
+                  src="/src/united-favicon.ico"
+                  alt="event icon"
+                  width="24"
+                  height="24"
+                  style="margin-right:8px; border-radius:4px;"
+                />
+                <${BaseText}>${date} ${time}<//>
+              </div>
+            `}
+            right=${html`<${BaseText}>${location}<//>`}
+            onClick=${() => {
+              setSelectedId(evt.timestamp);
+              conversationHandler.sendChoice(evt.timestamp);
+            }}
+            selected=${evt.timestamp === selectedId}
           />
-          ` : ''}
         `;
       })}
     </CustomCard>
   `;
-};
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
