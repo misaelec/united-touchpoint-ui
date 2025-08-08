@@ -136,63 +136,50 @@
   const [selectedId, setSelectedId] = React.useState(null);
 
   return html`
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      ${data.history.map((evt) => {
-        const d = new Date(evt.timestamp);
-        const mmdd = d.toLocaleDateString("en-US", {
-          month: "2-digit",
-          day: "2-digit"
-        });
-        const hhmm = d.toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: false
-        });
-        const name = evt.name || "";
-        const place = evt.location || "";
+    <CustomCard key="bag-timeline-carousel" selected=${false}>
+      <Carousel>
+        ${data.history.map((evt) => {
+          const d = new Date(evt.timestamp);
+          const date = d.toLocaleDateString("es-ES", {
+            day: "2-digit",
+            month: "2-digit"
+          });
+          const time = d.toLocaleTimeString("es-ES", {
+            hour: "2-digit",
+            minute: "2-digit"
+          });
+          const location = evt.location || "";
+          const isSelected = evt.timestamp === selectedId;
 
-        return html`
-          <div
-            key=${evt.timestamp}
-            style="
-              display:flex;
-              align-items:center;
-              padding:8px 0;
-              cursor:pointer;
-              background:${evt.timestamp === selectedId ? "#f0f0f0" : "transparent"};
-            "
-            onClick=${() => {
-              setSelectedId(evt.timestamp);
-              conversationHandler.sendChoice(evt.timestamp);
-            }}
-          >
-            <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
-              ${mmdd}
-            <//>
-            <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
-              ${hhmm}
-            <//>
-            <${BaseText} style=${{ flex: "2", marginRight: "16px" }}>
-              ${name}
-            <//>
-            <${BaseText} style=${{ flex: "2" }}>
-              ${place}
-            <//>
-          </div>
-        `;
-      })}
-    </div>
+          return html`
+            <${CustomCardRow}
+              key=${evt.timestamp}
+              selected=${isSelected}
+              left=${html`
+                <${BaseText}>${date} ${time}<//>
+              `}
+              right=${html`
+                <${BaseText}>${location}<//>
+              `}
+              onClick=${() => {
+                setSelectedId(evt.timestamp);
+                conversationHandler.sendChoice(evt.timestamp);
+              }}
+            />
+          `;
+        })}
+      </Carousel>
+    </CustomCard>
   `;
 };
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
-      <CustomCardRow 
-          left=${html`<BaseText>Visit website</BaseText>`}
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
                      />
     </CustomCard>
-    <CustomCard 
-          left=${html`<BaseText>View in app</BaseText>`}
+    <CustomCard href=https://apps.apple.com/us/app/united-airlines/id449945214 newTab=${true}>
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
        />
     </CustomCard>
   `;
