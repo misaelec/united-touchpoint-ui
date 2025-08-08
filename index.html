@@ -120,18 +120,17 @@
             // Initialize touchpoint with persisted history
             const savedSession = retrieveSession();
 						
-            const BRCGenAIVideo = ({ data }) => {
-              if (!data?.src) return null;
-              const videoSrc = `https://www.youtube.com/embed/${data.src}`;
-              return html`
-                <iframe
-                  width="264"
-                  height="160"
-                  src=${videoSrc}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>`;
-            };
+						const BRCGenAIVideo = ({ data }) => {
+		          const videoSrc = `https://www.youtube.com/embed/${data.src}`;
+		          return html`
+		            <iframe
+		              width="264"
+		              height="160"
+		              src=${videoSrc}
+		              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		              allowFullScreen
+		            ></iframe>`;
+		        };
 
            const BagTimeline = ({ data, conversationHandler }) => {
              const [selectedId, setSelectedId] = React.useState(null);
@@ -180,42 +179,16 @@
                    `;
                  })}
                </Carousel>
-               <div style="margin-top: 16px; padding: 16px; background: rgba(255, 255, 255, 0.05); border-radius: 16px; display: flex; flex-direction: column; gap: 12px;">
-                 <CustomCardRow
-                   icon=${Icons?.MapPin ?? null}
-                   left=${html`<BaseText>Honolulu, Hawaii</BaseText>`}
-                 />
-                 <CustomCardRow
-                   icon=${Icons?.PlaneTakeoff ?? null}
-                   left=${html`<BaseText>LAX Sept 1, 9:45 AM (United Airlines)</BaseText>`}
-                 />
-                 <CustomCardRow
-                   icon=${Icons?.PlaneLanding ?? null}
-                   left=${html`<BaseText>HNL Sept 8 – 3:00 PM</BaseText>`}
-                 />
-                 <CustomCardRow
-                   icon=${Icons?.Users ?? null}
-                   left=${html`<BaseText>2 Adults, 2 Kids</BaseText>`}
-                 />
-                 <CustomCardRow
-                   icon=${Icons?.Hotel ?? null}
-                   left=${html`<BaseText>Outrigger Waikiki Beach Resort</BaseText>`}
-                 />
-                 <CustomCardRow
-                   icon=${Icons?.DollarSign ?? null}
-                   left=${html`<BaseText>Total: <strong>$5,240</strong></BaseText>`}
-                 />
-               </div>
              `;
            };
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
-      <CustomCardRow  icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>Visit website</BaseText>`}
                      />
     </CustomCard>
     <CustomCard href=https://apps.apple.com/us/app/united-airlines/id449945214 newTab=${true}>
-      <CustomCardRow  icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
+      <CustomCardRow  Icon=${Icons.ArrowForward} left=${html`<BaseText>View in app</BaseText>`}
        />
     </CustomCard>
   `;
