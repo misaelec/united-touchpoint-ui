@@ -149,16 +149,17 @@
         const time = hasTimestamp ? d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : '';
 
         return html`
+          ${hasTimestamp ? html`
           <CustomCardRow
             key=${evt.timestamp}
-            icon=${Icons.ArrowForward}
+            left=${html`
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <img src="src/united-favicon.ico" alt="Time Icon" width="16" height="16" />
+      <BaseText>${date} ${time}</BaseText>
+    </div>
+  `}
             right=${html`<BaseText>${location}</BaseText>`}
           />
-          ${hasTimestamp ? html`
-            <CustomCardRow
-              left=${html`<BaseText faded>Fecha</BaseText>`}
-              right=${html`<BaseText>${date} ${time}</BaseText>`}
-            />
           ` : ''}
         `;
       })}
