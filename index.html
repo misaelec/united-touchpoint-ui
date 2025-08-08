@@ -136,54 +136,52 @@
   const [selectedId, setSelectedId] = React.useState(null);
 
   return html`
-    <CustomCard key="bag-timeline-list" selected=${false}>
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        ${data.history.map((evt) => {
-          const d = new Date(evt.timestamp);
-          const mmdd = d.toLocaleDateString("en-US", {
-            month: "2-digit",
-            day: "2-digit"
-          });
-          const hhmm = d.toLocaleTimeString("en-GB", {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-          });
-          const name = evt.name || "";
-          const place = evt.location || "";
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      ${data.history.map((evt) => {
+        const d = new Date(evt.timestamp);
+        const mmdd = d.toLocaleDateString("en-US", {
+          month: "2-digit",
+          day: "2-digit"
+        });
+        const hhmm = d.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false
+        });
+        const name = evt.name || "";
+        const place = evt.location || "";
 
-          return html`
-            <div
-              key=${evt.timestamp}
-              style="
-                display:flex;
-                align-items:center;
-                padding:8px 0;
-                cursor:pointer;
-                background:${evt.timestamp === selectedId ? "#f0f0f0" : "transparent"};
-              "
-              onClick=${() => {
-                setSelectedId(evt.timestamp);
-                conversationHandler.sendChoice(evt.timestamp);
-              }}
-            >
-              <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
-                ${mmdd}
-              <//>
-              <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
-                ${hhmm}
-              <//>
-              <${BaseText} style=${{ flex: "2", marginRight: "16px" }}>
-                ${name}
-              <//>
-              <${BaseText} style=${{ flex: "2" }}>
-                ${place}
-              <//>
-            </div>
-          `;
-        })}
-      </div>
-    </CustomCard>
+        return html`
+          <div
+            key=${evt.timestamp}
+            style="
+              display:flex;
+              align-items:center;
+              padding:8px 0;
+              cursor:pointer;
+              background:${evt.timestamp === selectedId ? "#f0f0f0" : "transparent"};
+            "
+            onClick=${() => {
+              setSelectedId(evt.timestamp);
+              conversationHandler.sendChoice(evt.timestamp);
+            }}
+          >
+            <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
+              ${mmdd}
+            <//>
+            <${BaseText} style=${{ width: "60px", marginRight: "16px" }}>
+              ${hhmm}
+            <//>
+            <${BaseText} style=${{ flex: "2", marginRight: "16px" }}>
+              ${name}
+            <//>
+            <${BaseText} style=${{ flex: "2" }}>
+              ${place}
+            <//>
+          </div>
+        `;
+      })}
+    </div>
   `;
 };
 
