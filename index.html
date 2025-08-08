@@ -136,35 +136,41 @@
   const [selectedId, setSelectedId] = React.useState(null);
 
   return html`
-    <CustomCard
-      key="bag-timeline-card"
-      selected=${false}
-      style=""
-    >
+    <CustomCard key="bag-timeline-card">
       ${data.history.map((evt) => {
-        const location = evt.location || '';
-        const hasTimestamp = Boolean(evt.timestamp);
-        const d = hasTimestamp ? new Date(evt.timestamp) : null;
-        const date = hasTimestamp ? d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" }) : '';
-        const time = hasTimestamp ? d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : '';
+        const hasTs = Boolean(evt.timestamp);
+        const d = hasTs ? new Date(evt.timestamp) : null;
+        const date = hasTs
+          ? d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" })
+          : "";
+        const time = hasTs
+          ? d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" })
+          : "";
+        const loc = evt.location || "";
 
         return html`
           <CustomCardRow
             key=${evt.timestamp}
             icon=${Icons.ArrowForward}
-            left=${html`<BaseText faded>${evt.event}</BaseText>`}
-            right=${html`<BaseText>${location}</BaseText>`}
             onClick=${() => {
               setSelectedId(evt.timestamp);
               conversationHandler.sendChoice(evt.timestamp);
             }}
+            left=${html`
+              <div style="display:flex; align-items:center; width:100%;">
+                <BaseText>${evt.event}</BaseText>
+                ${hasTs
+                  ? html`
+                      <BaseText faded style="margin-left:8px;">
+                        ${date} ${time}
+                      </BaseText>
+                    `
+                  : ""}
+              </div>
+            `}
+            right=${html`<BaseText>${loc}</BaseText>`}
+            selected=${evt.timestamp === selectedId}
           />
-          ${hasTimestamp ? html`
-            <CustomCardRow
-              left=${html`<BaseText faded>Fecha</BaseText>`}
-              right=${html`<BaseText>${date} ${time}</BaseText>`}
-            />
-          ` : ''}
         `;
       })}
     </CustomCard>
