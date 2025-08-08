@@ -133,45 +133,55 @@
 		        };
 
             const BagTimeline = ({ data, conversationHandler }) => {
-  const [selectedId, setSelectedId] = React.useState(null);
-
-  return html`
-    <CustomCard key="bag-timeline-carousel" selected=${false}>
-      <Carousel>
-        ${data.history.map((evt) => {
-          const d = new Date(evt.timestamp);
-          const date = d.toLocaleDateString("es-ES", {
-            day: "2-digit",
-            month: "2-digit"
-          });
-          const time = d.toLocaleTimeString("es-ES", {
-            hour: "2-digit",
-            minute: "2-digit"
-          });
-          const location = evt.location || "";
-          const isSelected = evt.timestamp === selectedId;
-
-          return html`
-            <${CustomCardRow}
-              key=${evt.timestamp}
-              selected=${isSelected}
-              left=${html`
-                <${BaseText}>${date} ${time}<//>
-              `}
-              right=${html`
-                <${BaseText}>${location}<//>
-              `}
-              onClick=${() => {
-                setSelectedId(evt.timestamp);
-                conversationHandler.sendChoice(evt.timestamp);
-              }}
-            />
-          `;
-        })}
-      </Carousel>
-    </CustomCard>
-  `;
-};
+             const [selectedId, setSelectedId] = React.useState(null);
+             return html`
+               <Carousel>
+                 ${data.history.map((evt) => {
+                   const location = evt.location || '';
+                   let imgSrc = 'https://mma.prnewswire.com/media/1017594/United_Airlines_Star_Wars.jpg?p=publish';
+                   if (location.includes('London')) {
+                     imgSrc = 'https://i.natgeofe.com/n/fb2875fc-bad9-44f8-8c45-fab6184719b7/20240629-0302-Jonathan%20Irish-NGCW-CITI-AA-London-_7R57614-Enhanced-NR_16x9.jpg';
+                   } else if (location.includes('Chicago')) {
+                     imgSrc = 'https://images.adsttc.com/media/images/6357/61f1/acba/9b43/c73e/acaf/large_jpg/make-no-little-plans-a-brief-history-of-chicago-architecture_6.jpg?1666671133';
+                   } else if (location.includes('San Francisco') || location.includes('SFO')) {
+                     imgSrc = 'https://www.msccruceros.com/-/media/global-contents/destinations/ports/usa/san-francisco/cruise-to-san-francisco-usa.jpg?bc=transparent&as=1&mh=1395&mw=2460&hash=C47E38BE85A6FBD2DB240293ECD137DA';
+                   }
+                   const hasTimestamp = Boolean(evt.timestamp);
+                   const d = hasTimestamp ? new Date(evt.timestamp) : null;
+                   const date = hasTimestamp ? d.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit" }) : '';
+                   const time = hasTimestamp ? d.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" }) : '';
+                   return html`
+                     <CustomCard
+                       key=${evt.timestamp}
+                       selected=${evt.timestamp === selectedId}
+                       onClick=${() => {
+                         setSelectedId(evt.timestamp);
+                         conversationHandler.sendChoice(evt.timestamp);
+                       }}
+                       style="width: 280px; height: 360px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column;"
+                     >
+                       <CustomCardImageRow
+                         src=${imgSrc}
+                         alt="Update image"
+                         style="width: 100%; height: 160px; object-fit: cover; border-top-left-radius: 8px; border-top-right-radius: 8px;"
+                       />
+                       <CustomCardRow
+                          Icon=${Icons.ArrowForward}
+                         left=${html`<BaseText faded>${evt.event}</BaseText>`}
+                         right=${html`<BaseText>${evt.location}</BaseText>`}
+                       />
+                       ${hasTimestamp ? html`
+                         <CustomCardRow
+                           left=${html`<BaseText faded>Fecha</BaseText>`}
+                           right=${html`<BaseText>${date} ${time}</BaseText>`}
+                         />
+                       ` : ''}
+                     </CustomCard>
+                   `;
+                 })}
+               </Carousel>
+             `;
+           };
 
      const WebsiteAppButtons = ({ data }) => html`
     <CustomCard href=http://www.united.com/claimform newTab=${true}>
